@@ -1,9 +1,26 @@
-# Especificação de requisitos
-## PROJETO: Sistema web de vendas Solar System
-### Curso de Sistemas de Informação
-### Prática Profissional em ADS
-### Turmas 05K e 05J
-### 1º semestre de 2021
+---
+title: "Especificação do Sistema Web de Vendas Solar System"
+author: "Prática Profissional em ADS"
+---
+
+
+**Índice**
+
+- [1. Introdução](#1-introdução)
+- [2. Informações sobre a empresa](#2-informações-sobre-a-empresa)
+- [3. Escopo do projeto](#3-escopo-do-projeto)
+- [4. Interessados](#4-interessados)
+- [5. Objetivos funcionais](#5-objetivos-funcionais)
+- [6. Objetivos não-funcionais](#6-objetivos-não-funcionais)
+- [7. COTS (Commercial Off-The-Shelf)](#7-cots-commercial-off-the-shelf)
+- [8. Casos de uso](#8-casos-de-uso)
+  - [8.1. Acessar funções restritas](#81-acessar-funções-restritas)
+  - [8.2. Efetuar registro](#82-efetuar-registro)
+  - [8.3. Efetuar seu próprio pedido](#83-efetuar-seu-próprio-pedido)
+  - [8.4. Efetuar pedido para o cliente](#84-efetuar-pedido-para-o-cliente)
+- [9. Wireframes](#9-wireframes)
+- [10. Diagrama de classes de domínio](#10-diagrama-de-classes-de-domínio)
+
 
 
 > Observação do professor: Este documento é um exemplo de parte de uma especificação de software. Não está com todos os detalhes necessários para iniciar o desenvolvimento de um software, mas serve de template para que cada grupo inicie a redação do documento do seu projeto.
@@ -11,7 +28,7 @@
 > É uma adaptação, mas não uma tradução exata, de um [exemplo disponível na Universidade de Ohio](http://web.cse.ohio-state.edu/~bair.41/616/Project/Example_Document/Req_Doc_Example.html).
 
 
-# Introdução
+# 1. Introdução
 
 Este é um documento de especificação de requisitos para um novo sistema web de vendas de produtos da Empresa Solar Systems. A Empresa Solar Systems vende equipamentos para a geração de energia elétrica de formas alternativas, tais como células fotovoltaicas e turbinas eólicas.
 
@@ -20,14 +37,14 @@ O sistema deverá permitir que clientes e funcionários da empresa naveguem pelo
 Este documento descreve os requisitos não-funcionais, modela os requisitos funcionais com casos de uso e modela os conceitos do domínio do problema.
 
 
-# Informações sobre a empresa
+# 2. Informações sobre a empresa
 
 A Empresa Solar Systems vende equipamentos para a geração de energia de formas alternativas e identificou tendências que causarão um aumento significativo na demanda por seus produtos.
 
 Devido à natureza técnica e inovadora de seus produtos, a empresa possui vendedores capazes de orientar os clientes no processo de escolher um sistema de energia alternativa. A empresa possui também funcionários que têm a função de gerente do produto. O gerente do produto é um especialista em um determinado produto ou em uma determinada linha de produtos. Ele produz os *whitepapers*, documentos altamente técnicos e focados nas especificações dos produtos.
 
 
-# Escopo do projeto
+# 3. Escopo do projeto
 
 O escopo deste projeto é um sistema web que dá suporte à venda de produtos da empresa diretamente aos clientes, bem como à rede de vendedores. A publicidade de produtos, o controle de estoque e a cobrança não são parte deste projeto.
 
@@ -36,7 +53,7 @@ A engine de pesquisa web será adquirida como um componente pronto para o novo s
 > Observação do professor: neste exemplo, deixei como parte do projeto somente a proteção por senha, assumindo que as demais questões de segurança serão tratadas pela equipe de operações. No caso do projeto do seu grupo, será necessário tratar destes outros aspectos de segurança.
 
 
-# Interessados
+# 4. Interessados
 
 Aqueles que irão se beneficiar diretamente e aqueles que serão afetados pelo novo sistema:
 
@@ -57,7 +74,7 @@ Aqueles que irão se beneficiar diretamente e aqueles que serão afetados pelo n
 * Departamento de Tecnologia da Informação: Será responsável pela implementação da nova base de dados, hospedagem da aplicação web e manutenção do sistema.
 
 
-# Objetivos funcionais
+# 5. Objetivos funcionais
 
 1. O sistema deverá permitir que clientes e vendedores efetuem pedidos de produtos on-line.  
    
@@ -109,7 +126,7 @@ Aqueles que irão se beneficiar diretamente e aqueles que serão afetados pelo n
    Isto melhorará o serviço ao cliente e reduzirá o número de chamadas ao suporte por clientes estrangeiros.
 
 
-# Objetivos não-funcionais
+# 6. Objetivos não-funcionais
 
 a. O sistema deverá estar completamente operacional pelo menos 99.99% do tempo.
 
@@ -146,7 +163,7 @@ o. O sistema deverá ter interface com
 * A engine de pesquisa (a ser adquirida).
 
 
-# COTS (Commercial Off-The-Shelf)
+# 7. COTS (Commercial Off-The-Shelf)
 
 Os softwares que serão adquiridos para compor o sistema são:
 
@@ -155,22 +172,62 @@ Os softwares que serão adquiridos para compor o sistema são:
 * Engine de pesquisa.
 
 
-# Casos de uso
+# 8. Casos de uso
 
-## Diagrama de casos de uso
+A figura a seguir apresenta o diagrama de casos de uso:
+
+![Diagrama de casos de uso](diagramas/casos-de-uso.png)
+
+
+## 8.1. Acessar funções restritas
+
+**Nome do caso de uso:** Acessar funções restritas
+
+**Resumo:** Para ganhar acesso a informações restritas ou personalizadas, fazer pedidos ou outras transações especializadas, um usuário precisa se autenticar e o sistema determinará seu nível de acesso.
+
+**Pré-condições:**
+* O usuário já se registrou.
+
+**Pós-condições:**
+* O usuário pode obter informações e realizar funções disponíveis para o seu nível de acesso.
+
+**Fluxo principal:** 
+
+1. O usuário seleciona a operação para efetuar o login.
+2. O sistema solicita o seu *username* e a sua senha.
+3. O usuário entra seu *username*  e sua senha.
+4. O sistema verifica que o *username* e a senha correspondem às informações de um de seus usuários registrados.
+5. O sistema inicia uma sessão e apresenta uma mensagem de boas-vindas baseada nas preferências do usuário.
+
+
+**Fluxos alternativos:**
+
+Passo 4:
+* Se o *username* é invalido, o caso de uso retorna para o passo 2.
+
+Passo 4:
+* Se o *username* é válido e a senha é inválida, o sistema dá uma nova oportunidade para o usuário entrar a senha. Quando o usuário entra outra senha, o caso de uso continua com o passo 4, utilizando o *username* já informado e a nova senha.
+
+
+## 8.2. Efetuar registro
 
 > (em elaboração)
 
-## Descrições dos casos de uso
+
+## 8.3. Efetuar seu próprio pedido
+
+> (em elaboração)
+
+## 8.4. Efetuar pedido para o cliente
 
 > (em elaboração)
 
 
-# Wireframes
+# 9. Wireframes
 
 > (em elaboração)
 
 
-# Diagrama de classes de domínio
+# 10. Diagrama de classes de domínio
 
 > (em elaboração)
